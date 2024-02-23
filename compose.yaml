@@ -1,0 +1,19 @@
+services:
+  db:
+    image: postgres:12.18-bullseye
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=HermioneGranger999
+  
+  web:
+    build: ./core
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "3000:8000"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=HermioneGranger999
+    depends_on:
+      - db
